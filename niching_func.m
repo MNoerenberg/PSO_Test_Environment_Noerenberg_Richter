@@ -89,6 +89,8 @@ function fit = five_uneven_peak_trap(x)
 % No. of global peaks: 2
 % No. of local peaks:  3.
 
+x = x*30;
+
 result = -1;
 if (x >=0 & x < 2.5)
 	result = 80*(2.5-x);
@@ -118,6 +120,8 @@ function fit = equal_maxima(x)
 % No. of global peaks: 5
 % No. of local peaks:  0.
 
+% no range fitting needed
+
 fit = sin( 5*pi*x ).^6;
 
 %==============================================================================
@@ -128,6 +132,8 @@ function fit = uneven_decreasing_maxima(x)
 % Variable ranges: x in [0, 1]
 % No. of global peaks: 1
 % No. of local peaks:  4.
+
+% no range fitting needed
 
 fit = exp(-2*log(2)*((x-0.08)/0.854)^2)*sin(5*pi*(x^0.75-0.05))^6;
 
@@ -140,6 +146,8 @@ function fit = himmelblau(x)
 % No. of global peaks: 4
 % No. of local peaks:  0.
 
+x = (x.*12) - 6;      %range Fitting for both variables
+
 fit = 200 - (x(1).^2 + x(2) - 11).^2 - (x(1) + x(2).^2 - 7).^2;
 
 %==============================================================================
@@ -151,6 +159,9 @@ function fit = six_hump_camel_back(x)
 % No. of global peaks: 2
 % No. of local peaks:  2.
 
+x_scale = [1.9; 1.1];
+x = (x.*(2*x_scale)-x_scale);
+
 fit = -((4-2.1*x(1).^2+(x(1).^4)/3).*x(1).^2+x(1).*x(2)+(4*x(2).^2-4).*x(2).^2);
 
 %==============================================================================
@@ -161,6 +172,9 @@ function fit = shubert(x)
 % Variable ranges: x_i in  [−10, 10]^n, i=1,2,...,n
 % No. of global peaks: n*3^n
 % No. of local peaks: many.
+
+% x ranging problematic how to handle ^n
+x = x.*10;
 
 [tmp,D] = size(x);
 result = 1;
@@ -179,6 +193,9 @@ function fit = vincent(x)
 % No. of global optima: 6^n
 % No. of local optima:  0.
 
+% x ranging problematic how to handle ^n
+x = x.*(10-0.25)+0.25;
+
 [tmp,D] = size(x);
 fit = sum( sin( 10*log(x) ) )/D;
 
@@ -189,6 +206,10 @@ function fit = modified_rastrigin_all(x)
 % Variable ranges: x_i in [0, 1]^n, i=1,2,...,n
 % No. of global peaks: \prod_{i=1}^n k_i
 % No. of local peaks:  0.
+
+% no ranging for x needed (?)
+
+
 MMP = 0;
 [tmp,D] = size(x);
 if D == 2
